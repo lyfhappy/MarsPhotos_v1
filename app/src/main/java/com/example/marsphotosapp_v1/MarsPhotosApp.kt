@@ -6,6 +6,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -22,7 +23,7 @@ import okhttp3.internal.platform.android.BouncyCastleSocketAdapter.Companion.fac
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MarsPhotosApp() {
+fun MarsPhotosApp(viewModel: MarsViewModel) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -31,10 +32,9 @@ fun MarsPhotosApp() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            val marsViewModel: ViewModelProvider.Factory =
-                viewModelFactory { MarsViewModel.Factory }
+            //val marsViewModel: MarsViewModel = viewModelFactory {  }
             HomeScreen(
-                marsUiState = marsViewModel.marsUiState,
+                marsUiState = viewModel.marsUiState,
                 contentPadding = it
             )
         }
